@@ -178,8 +178,18 @@ class Menu(root.Tk):
             with open('test.csv', 'a') as f:
                 f.write(NewTask.TaskName + ',' + NewTask.TaskDesc + ',' + NewTask.Status + ',' + str(NewTask.Priority) + ',' + str(NewTask.StartD) + ',' + str(NewTask.StartM) + ',' + str(NewTask.StartY) + ',' + str(NewTask.EndD) + ',' + str(NewTask.EndM) + ',' + str(NewTask.EndY) + ', \n')
 
-
     def ListTasks(self):
+
+        class EditTask():
+            def __init__(self, Task, menu):
+                self.task = Task
+                self.menu = menu
+                print("Hi")
+
+            def __call__(self):
+                self.menu.NewWin()
+                print(self.task)  # Test
+
         self.ListTasksWin = Toplevel(self)
         self.ListTasksWin.title("List All Tasks")
         sizex = 700
@@ -224,7 +234,7 @@ class Menu(root.Tk):
             lblTaskEDate = Label(self.ListTasksWin, text=(Task.EndD + ' ' + Task.EndM + ' ' + Task.EndY))
             lblTaskStatus = Label(self.ListTasksWin, text=Task.Status)
             lblTaskPriority = Label(self.ListTasksWin, text=Task.Priority)
-            btnEdit = Button(self.ListTasksWin, text="Edit", command=EditTask(self.ListTasks.Task))
+            btnEdit = Button(self.ListTasksWin, text="Edit", command=EditTask(Task, self))
 
             lblTaskName.grid(row=TasksCount, column=0)
             lblTaskDesc.grid(row=TasksCount, column=1)
@@ -244,16 +254,6 @@ class Menu(root.Tk):
         self.NewWin.wm_geometry('%dx%d+%d+%d' % (sizex, sizey, posx, posy))
         
     
-
-class EditTask(root.Tk):
-    def __init__(self, Task):
-        self.task = Task
-        print("Hi")
-        
-        
-    def __call__(self):
-        NewWin()
-        print(self.Task) #Test
 
     
 ##        self.EditTaskWin = Toplevel(self)
