@@ -4,6 +4,7 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk
 
+
 class ToDoTask:
     def __init__(self, TaskName, TaskDesc, Status, Priority, StartD, StartM, StartY, EndD, EndM, EndY):
         self.TaskName = TaskName
@@ -35,7 +36,6 @@ class Menu(root.Tk):
         btnAddNewTask.grid(row=0, column=0)
         btnListTasks.grid(row=1, column=0)
         btnQuit.grid(row=2, column=1)
-
         
     def AddNewTask(self):
         self.NewTaskWin = Toplevel(self)
@@ -146,7 +146,6 @@ class Menu(root.Tk):
         btnAddTask.place(x=40, y=215)
         btnMenu.place(x=300, y=215)
 
-
     def WriteNewToFile(self):
         TaskName = self.NewTaskWin.entTaskName.get()
         TaskDesc = self.NewTaskWin.entTaskDesc.get()
@@ -187,7 +186,7 @@ class Menu(root.Tk):
                 print("Hi")
 
             def __call__(self):
-                self.menu.NewWin()
+                self.menu.NewWin(self.task)
                 print(self.task)  # Test
 
         self.ListTasksWin = Toplevel(self)
@@ -244,25 +243,14 @@ class Menu(root.Tk):
             lblTaskPriority.grid(row=TasksCount, column=5)
             btnEdit.grid(row=TasksCount, column=6)
 
-    def NewWin(self):
-        self.NewWin = Toplevel(self)
-        self.NewWin.title("Add New Task")
+    def NewWin(self, Task):
+        self.EditTaskWin = Toplevel(self)
+        self.EditTaskWin.title("Edit Task")
         sizex = 440
         sizey = 250
         posx = 800 #Sets the x position of where on the screen the window will appear
         posy = 200 #Sets the y position of where on the screen the window will appear
-        self.NewWin.wm_geometry('%dx%d+%d+%d' % (sizex, sizey, posx, posy))
-        
-    
-
-    
-##        self.EditTaskWin = Toplevel(self)
-##        self.EditTaskWin.title("Edit Task")
-##        sizex = 440
-##        sizey = 250
-##        posx = 800 #Sets the x position of where on the screen the window will appear
-##        posy = 200 #Sets the y position of where on the screen the window will appear
-##        self.EditTaskWin.wm_geometry('%dx%d+%d+%d' % (sizex, sizey, posx, posy))
+        self.EditTaskWin.wm_geometry('%dx%d+%d+%d' % (sizex, sizey, posx, posy))
 
         self.EditTaskWin.entTaskName = StringVar()
         self.EditTaskWin.entTaskName.set(Task.TaskName)
